@@ -64,7 +64,6 @@ When you reach your goal, the star will change form selecting randomly from a li
 
 Settings: If set active, goal, and calorie permissions are not turned on, it will print "NAN" or "0". Heart Rate activated when you click Star, click again to turn off to save battery.
 
-FILE ZILE 8.7 MB DUE TO DAILY JPEG BACKGROUNDS CHANGES 120 Backgrounds - each made for 336X336 resolution.
 
 
 
