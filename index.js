@@ -15,6 +15,7 @@
 /*--- Import Information from user Account ---*/
 import { settingsStorage } from "settings";
 import { me as appbit } from "appbit";
+import { HeartRateSensor } from "heart-rate";
 import clock from "clock";
 import * as document from "document";
 import { preferences } from "user-settings";
@@ -57,7 +58,20 @@ const stairslabel = document.getElementById("stairslabel");
 const distancelabel = document.getElementById("distancelabel");
 const targetlabel = document.getElementById("targetlabel");
 
- 
+
+  
+  if (HeartRateSensor && appbit.permissions.granted("access_heart_rate")) {
+   const hrm = new HeartRateSensor();
+  hrm.addEventListener("reading", () => {
+    heartlabel.text = (`${hrm.heartRate}`);
+
+  });
+  display.addEventListener("change", () => {
+    // Automatically stop the sensor when the screen is off to conserve battery
+    display.on ? hrm.start() : hrm.stop();
+  });
+  hrm.start();
+  }else {heartlabel.text = "off";}
 
 
 
@@ -76,7 +90,10 @@ clock.ontick = (evt) => {
 
  /*--- Update Stats for Screen ---*/
   updateScene();
-  distancelabel.text = (0.001 * userActivity.adjusted.distance).toFixed(1) + " km";
+  if (preferences.UnitsSettings == "us"){
+  distancelabel.text = (0.000621371 * userActivity.adjusted.distance).toFixed(1) + " mi";}
+  else {distancelabel.text = (0.001 * userActivity.adjusted.distance).toFixed(1) + " km";}
+
   stairslabel.text = userActivity.adjusted.elevationGain;
   stepsLabel.text = userActivity.adjusted.steps;
   firelabel.text = userActivity.adjusted.calories;
