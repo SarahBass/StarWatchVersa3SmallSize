@@ -1,5 +1,5 @@
 # StarWatchVersa3SmallSize
-Smaller cleaner size that runs better on the Versa 3
+Smaller cleaner size that runs better on the Versa 3 - COMPLETE
 
 Versa3 Sense SDK 6.0 
 
